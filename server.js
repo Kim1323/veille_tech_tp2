@@ -24,3 +24,15 @@ APP.get('/',  (req, res) => {
 		res.render('index.ejs', {adresse: resultat})
 	})
 })
+
+APP.get('/detruire/:id', (req, res) => {
+	var id = req.params.id;
+	console.log(id);
+	db.collection('adresse').findOneAndDelete(
+		{"_id": OBJECT_ID(req.params.id)}, 
+		(err, resultat) => {
+			if (err) 
+				return console.log(err);
+			res.redirect('/');
+		})
+})
