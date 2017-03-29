@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html lang="fr">
+  <head>
+    <meta charset="UTF-8">
+    <link rel="stylesheet" type="text/css" href="css/style.css">
+    <title>Veille - TP2</title>
+  </head>
+  <body>
+    <section>
+      <h1>TP2</h1>
+      <table>
+        <% for(var i=0; i < adresse.length; i++) {%>
+          <tr>
+            <td><%= adresse[i].npm %></td>
+            <td><%= adresse[i].prenom %></td>
+            <td><%= adresse[i].telephone %></td>
+            <td><%= adresse[i]._id %></td>
+          </tr>
+        <% } %>
+      </table>
+    </section>
+  </body>
+</html>

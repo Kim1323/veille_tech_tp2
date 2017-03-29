@@ -4,6 +4,8 @@ const EXPRESS = require("express");
 const APP = EXPRESS();
 const PORT = 8081;
 
+APP.set('view engine', 'ejs'); // générateur de template 
+
 
 MONGO_CLIENT.connect('mongodb://127.0.0.1:27017/carnet_adresse', (err, database) => {
 	if (err)
@@ -16,10 +18,9 @@ MONGO_CLIENT.connect('mongodb://127.0.0.1:27017/carnet_adresse', (err, database)
 
 APP.get('/',  (req, res) => {
 	console.log("hello")
-	res.send("hi");
 	db.collection('adresse').find().toArray(function(err, resultat){
 		if (err)
 			return console.log(err);
-		console.log(resultat);
+		res.render('index.ejs', {adresse: resultat})
 	})
 })
