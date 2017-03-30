@@ -8,13 +8,31 @@
   <body>
     <section>
       <h1>TP2</h1>
+      <form action="/nouveau" method="POST">
+        <button type="submit">Ajouter</button>
+      </form>
+      <form action="/trier" method="POST">
+        <button type="submit">Trier</button>
+      </form>
+
       <table>
+          <tr>
+            <th>Nom</th>
+            <th>Prénom</th>
+            <th>Téléphone</th>
+            <th>ID</th>
+          </tr>
         <% for(var i=0; i < adresse.length; i++) {%>
           <tr>
-            <td><%= adresse[i].npm %></td>
+            <td><%= adresse[i].nom %></td>
             <td><%= adresse[i].prenom %></td>
             <td><%= adresse[i].telephone %></td>
             <td><%= adresse[i]._id %></td>
+            <td>
+              <form action="/modifier/<%= adresse[i]._id %>" method="POST">
+                <button type="submit">Modifier</button>
+              </form>
+            </td>
             <td>
               <form action="/detruire/<%= adresse[i]._id %>" method="GET">
                 <button type="submit">Supprimer</button>
