@@ -68,7 +68,7 @@ APP.post("/modifier", (req, res) => {
 				"telephone": req.body.telephone
 			} 
 		}, (err, resultat) => {
-		if (err) 
+		if (err) 2
 			return console.log(err);
 	})
 })
@@ -76,10 +76,21 @@ APP.post("/modifier", (req, res) => {
 /* = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = */
 
 //Triage des objets par nom en ordre ascendant ou descendant
-APP.get("/trier", (req, res) => {
-	console.log("trier");
+APP.post("/trierA", (req, res) => {
+	console.log("trierA");
 	//db.collection("adresse").find().sort( { nom: 1 } );
 	db.collection("adresse").find().sort( { nom: 1 } ).toArray(function(err, resultat){
+		if (err)
+			return console.log(err);
+		res.render("index.ejs", {adresse: resultat}) //Affichage des données
+	})
+})
+
+//Triage des objets par nom en ordre ascendant ou descendant
+APP.post("/trierD", (req, res) => {
+	console.log("trierD");
+	//db.collection("adresse").find().sort( { nom: 1 } );
+	db.collection("adresse").find().sort( { nom: -1 } ).toArray(function(err, resultat){
 		if (err)
 			return console.log(err);
 		res.render("index.ejs", {adresse: resultat}) //Affichage des données

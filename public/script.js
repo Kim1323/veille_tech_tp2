@@ -1,20 +1,23 @@
 const BTN_NOUVEAU = document.getElementById("btn_nouveau");
 const BTN_MODIFIER = document.getElementsByClassName("btn_modifier");
 const FRM_AJOUT = document.getElementById("frm_ajout");
+const GROUPE_BTN = document.getElementsByTagName("button");
+
+/* = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = */
+
 FRM_AJOUT.classList.add("cacher");
 
 //Cache et affiche le formulaire d'ajout
 BTN_NOUVEAU.addEventListener("click", function(){
-	if((FRM_AJOUT.className).indexOf("cacher") === -1){
-		FRM_AJOUT.classList.add("cacher");
-	}else{
-		FRM_AJOUT.classList.remove("cacher");
-	}
+	(possedeClasse(FRM_AJOUT, "cacher") == false) ? 
+		(ajouterClasse(FRM_AJOUT, "cacher")) : (enleverClasse(FRM_AJOUT, "cacher"))
 })
 
 for(var i = 0; i < BTN_MODIFIER.length; i++){
 	BTN_MODIFIER[i].addEventListener("click", modifier);
 }
+
+/* = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = */
 
 //Prise des nouvelles données et requête AJAX
 function modifier(){
@@ -41,4 +44,25 @@ function traiterRequest(e){
 	if(xhr.readyState == 4 && xhr.status == 200){
 		console.log('ajax fonctionne')
 	}
+}
+
+/* = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = */
+
+function cacherETAfficherElements(elementCacher, elementAfficher){
+	elementCacher.addEventListener("click", function(){
+		ajouterClasse(elementCacher, "cacher");
+		enleverClasse(elementAfficher, "cacher");
+	})
+}
+
+function ajouterClasse(element, classe){
+	element.classList.add(classe);
+}
+
+function enleverClasse(element, classe){
+	element.classList.remove(classe);
+}
+
+function possedeClasse( element, classe ) {
+     return (" " + element.className + " " ).indexOf( " " + classe + " " ) > -1;
 }
