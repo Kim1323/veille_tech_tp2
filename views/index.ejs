@@ -8,9 +8,11 @@
 <body>
   <section>
     <h1>TP2</h1>
-    <button type="submit">Trier</button>
+    <form action="/trier" method="GET" >
+      <button type="submit">Trier</button>
+    </form>
     <button id="btn_nouveau">Nouveau</button>
-    <form id="frm_ajout" class="cacher">
+    <form action="/ajouter" method="POST" id="frm_ajout" class="cacher">
       <input type="text" placeholder="Nom" name="nom">
       <input type="text" placeholder="Prénom" name="prenom">
       <input type="text" placeholder="Téléphone" name="telephone">

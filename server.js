@@ -11,7 +11,7 @@ APP.use(EXPRESS.static('public'))  // pour utiliser le dossier public
 APP.use(BODY_PARSER.json())  // pour traiter les données JSON
 
 
-/* = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = */
+/* ===================================================================================== */
 
 
 //Connexion à la base de données "carnet_adresse"
@@ -29,38 +29,36 @@ APP.get("/",  (req, res) => {
 	db.collection("adresse").find().toArray(function(err, resultat){
 		if (err)
 			return console.log(err);
-		res.render("index.ejs", {adresse: resultat})
+		res.render("index.ejs", {adresse: resultat}) //Affichage des données
 	})
 })
-
 
 /* = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = */
 
 
 //Destruction d'un objet de la base de données avec son ID
 APP.get("/detruire/:id", (req, res) => {
-	console.log("Destruction de " + req.params.id);
 	db.collection("adresse").findOneAndDelete(
 		{"_id": OBJECT_ID(req.params.id)}, 
 		(err, resultat) => {
 			if (err) 
 				return console.log(err);
-			res.redirect("/");
+			res.redirect("/"); //Rediraction vers l'affichage des données
 		})
 })
 
+//Ajout d'un objet à la base de données
 APP.post("/ajouter",  (req, res) => {
 	db.collection("adresse").save(req.body, (err, result) => {
 		if (err)
 			return console.log(err);
-		console.log("ajouter");
+		res.redirect("/"); //Rediraction vers l'affichage des données
 	})
 })
 
-
 /* = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = */
 
-//Modification d'un objet de la base de données
+//Modification d'un objet de la base de données avec son ID
 APP.post("/modifier", (req, res) => {
 	db.collection('adresse').update(
 		{"_id": OBJECT_ID(req.body.id)}, { 
@@ -75,15 +73,15 @@ APP.post("/modifier", (req, res) => {
 	})
 })
 
-
-
-
 /* = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = */
 
 //Triage des objets par nom en ordre ascendant ou descendant
 APP.get("/trier", (req, res) => {
 	console.log("trier");
 	//db.collection("adresse").find().sort( { nom: 1 } );
-	res.redirect("/");
-
+	db.collection("adresse").find().sort( { nom: 1 } ).toArray(function(err, resultat){
+		if (err)
+			return console.log(err);
+		res.render("index.ejs", {adresse: resultat}) //Affichage des données
+	})
 })
