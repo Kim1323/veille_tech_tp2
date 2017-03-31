@@ -1,46 +1,46 @@
 <!DOCTYPE html>
 <html lang="fr">
-  <head>
-    <meta charset="UTF-8">
-    <link rel="stylesheet" type="text/css" href="style/css/style.css">
-    <title>Veille - TP2</title>
-  </head>
-  <body>
-    <section>
-      <h1>TP2</h1>
-      <form action="/nouveau" method="POST">
-        <button type="submit">Ajouter</button>
-      </form>
-      <form action="/trier" method="POST">
-        <button type="submit">Trier</button>
-      </form>
-
-      <table>
-          <tr>
-            <th>Nom</th>
-            <th>Prénom</th>
-            <th>Téléphone</th>
-            <th>ID</th>
-          </tr>
-        <% for(var i=0; i < adresse.length; i++) {%>
-          <tr>
-            <td><%= adresse[i].nom %></td>
-            <td><%= adresse[i].prenom %></td>
-            <td><%= adresse[i].telephone %></td>
-            <td><%= adresse[i]._id %></td>
-            <td>
-              <form action="/modifier/<%= adresse[i]._id %>" method="POST">
-                <button type="submit">Modifier</button>
-              </form>
-            </td>
-            <td>
-              <form action="/detruire/<%= adresse[i]._id %>" method="GET">
-                <button type="submit">Supprimer</button>
-              </form>
-            </td>
-          </tr>
-        <% } %>
-      </table>
-    </section>
-  </body>
+<head>
+<meta charset="UTF-8">
+<link rel="stylesheet" type="text/css" href="style/css/style.css">
+<title>Veille - TP2</title>
+</head>
+<body>
+  <section>
+    <h1>TP2</h1>
+    <button type="submit">Trier</button>
+    <button id="btn_nouveau">Nouveau</button>
+    <form id="frm_ajout" class="cacher">
+      <input type="text" placeholder="Nom" name="nom">
+      <input type="text" placeholder="Prénom" name="prenom">
+      <input type="text" placeholder="Téléphone" name="telephone">
+      <button id="btn_ajouter">Ajouter</button>
+    </form>
+    <table>
+        <tr>
+          <th>Nom</th>
+          <th>Prénom</th>
+          <th>Téléphone</th>
+          <th>ID</th>
+        </tr>
+      <% for(var i=0; i < adresse.length; i++) {%>
+        <tr>
+          <td contenteditable='true'><%= adresse[i].nom %></td>
+          <td contenteditable='true'><%= adresse[i].prenom %></td>
+          <td contenteditable='true'><%= adresse[i].telephone %></td>
+          <td><%= adresse[i]._id %></td>
+          <td>
+              <button class="btn_modifier">Modifier</button>
+          </td>
+          <td>
+            <form action="/detruire/<%= adresse[i]._id %>" method="GET">
+              <button type="submit"> Supprimer</button>
+            </form>
+          </td>
+        </tr>
+      <% } %> <!-- Fin de la boucle -->
+    </table>
+  </section>
+  <script type="text/javascript" src="script.js"></script>
+</body>
 </html>

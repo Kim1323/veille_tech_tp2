@@ -1,5 +1,14 @@
 @import "normalize.less";
 
+.taille100{
+	width: 100%;
+	height: 100%;
+}
+
+.cacher{
+	//display: none;
+}
+
 body{
 	display: flex;
 	justify-content: center;
@@ -16,11 +25,17 @@ table{
 				text-align: center;
 				width: 100px;
 				form{
-					width: 100%;
-					height: 100%;
+					.taille100;
 					button{
-						width: 100%;
-						height: 100%;
+						/*
+						padding: 0;
+						border: none;
+						background: none;
+						*/
+						.taille100;
+						img{
+							width: 75%;
+						}
 					}
 				}
 			}
