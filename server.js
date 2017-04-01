@@ -60,6 +60,7 @@ APP.post("/ajouter",  (req, res) => {
 
 //Modification d'un objet de la base de données avec son ID
 APP.post("/modifier", (req, res) => {
+	console.log("modif");
 	db.collection('adresse').update(
 		{"_id": OBJECT_ID(req.body.id)}, { 
 			$set: {
@@ -68,10 +69,11 @@ APP.post("/modifier", (req, res) => {
 				"telephone": req.body.telephone
 			} 
 		}, (err, resultat) => {
-		if (err)
+		if (err) 
 			return console.log(err);
 	})
 })
+
 
 /* = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = */
 

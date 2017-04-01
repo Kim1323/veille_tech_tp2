@@ -35,13 +35,14 @@ function modifier(){
 		"id" : elmAModif[3].innerHTML
 	}
 	sNouvelleDonnee = JSON.stringify(nouvelleDonnees);
-
+	console.log(sNouvelleDonnee)
 	//Envoie de la requête
 	xhr = new XMLHttpRequest();
 	xhr.open('POST', "modifier", true);
 	xhr.setRequestHeader('Content-type', 'application/json');
 	xhr.send(sNouvelleDonnee);
 	xhr.addEventListener("readystatechange", traiterRequest, false);
+
 }
 
 //Vérification de la requête

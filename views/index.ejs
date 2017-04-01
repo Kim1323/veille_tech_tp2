@@ -43,11 +43,9 @@
           <td contenteditable='true'><%= adresse[i].telephone %></td>
           <td><%= adresse[i]._id %></td>
           <td>
-            <form>
               <button class="btn_modifier">
                 <img src="img/icon_modifier.png" alt="bouton-modifier">
               </button>
-            </form>
           </td>
           <td>
             <form action="/detruire/<%= adresse[i]._id %>" method="GET">
