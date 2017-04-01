@@ -8,18 +8,24 @@
 <body>
   <section>
     <h1>TP2</h1>
-    <form action="/trierA" method="POST">
-      <button >Trier &uarr;</button>
-    </form>
-    <form action="/trierD" method="POST">
-      <button >Trier &darr;</button>
-    </form>
-    <button id="btn_nouveau">Nouveau</button>
+    <div id="divTrieAjout">
+      <form action="/trierA" method="POST">
+        <button class="btn_trier">Trier &uarr;</button>
+      </form>
+      <form action="/trierD" method="POST">
+        <button class="btn_trier">Trier &darr;</button>
+      </form>
+      <button id="btn_nouveau">
+        <img src="img/icon_ajouter.png" alt="bouton-ajouter">
+      </button>
+    </div>
     <form action="/ajouter" method="POST" id="frm_ajout" class="cacher">
       <input type="text" placeholder="Nom" name="nom">
       <input type="text" placeholder="Prénom" name="prenom">
       <input type="text" placeholder="Téléphone" name="telephone">
-      <button id="btn_ajouter">Ajouter</button>
+      <button id="btn_ajouter">
+        <img src="img/icon_comfirmer.png" alt="bouton-comfirmer">
+      </button>
     </form>
     <table>
         <tr>
@@ -27,6 +33,8 @@
           <th>Prénom</th>
           <th>Téléphone</th>
           <th>ID</th>
+          <th></th>
+          <th></th>
         </tr>
       <% for(var i=0; i < adresse.length; i++) {%>
         <tr>
@@ -35,11 +43,17 @@
           <td contenteditable='true'><%= adresse[i].telephone %></td>
           <td><%= adresse[i]._id %></td>
           <td>
-              <button class="btn_modifier">Modifier</button>
+            <form>
+              <button class="btn_modifier">
+                <img src="img/icon_modifier.png" alt="bouton-modifier">
+              </button>
+            </form>
           </td>
           <td>
             <form action="/detruire/<%= adresse[i]._id %>" method="GET">
-              <button type="submit"> Supprimer</button>
+              <button type="submit">
+                <img src="img/icon_supprimer.png" alt="bouton-supprimer">
+              </button>
             </form>
           </td>
         </tr>

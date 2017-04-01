@@ -43,7 +43,7 @@ APP.get("/detruire/:id", (req, res) => {
 		(err, resultat) => {
 			if (err) 
 				return console.log(err);
-			res.redirect("/"); //Rediraction vers l'affichage des données
+			res.redirect("/"); //Redirection vers l'affichage des données
 		})
 })
 
@@ -52,7 +52,7 @@ APP.post("/ajouter",  (req, res) => {
 	db.collection("adresse").save(req.body, (err, result) => {
 		if (err)
 			return console.log(err);
-		res.redirect("/"); //Rediraction vers l'affichage des données
+		res.redirect("/"); //Redirection vers l'affichage des données
 	})
 })
 
@@ -68,17 +68,16 @@ APP.post("/modifier", (req, res) => {
 				"telephone": req.body.telephone
 			} 
 		}, (err, resultat) => {
-		if (err) 2
+		if (err)
 			return console.log(err);
 	})
 })
 
 /* = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = */
 
-//Triage des objets par nom en ordre ascendant ou descendant
+//Triage des objets par nom en ordre ascendant
 APP.post("/trierA", (req, res) => {
 	console.log("trierA");
-	//db.collection("adresse").find().sort( { nom: 1 } );
 	db.collection("adresse").find().sort( { nom: 1 } ).toArray(function(err, resultat){
 		if (err)
 			return console.log(err);
@@ -86,10 +85,9 @@ APP.post("/trierA", (req, res) => {
 	})
 })
 
-//Triage des objets par nom en ordre ascendant ou descendant
+//Triage des objets par nom en ordre descendant
 APP.post("/trierD", (req, res) => {
 	console.log("trierD");
-	//db.collection("adresse").find().sort( { nom: 1 } );
 	db.collection("adresse").find().sort( { nom: -1 } ).toArray(function(err, resultat){
 		if (err)
 			return console.log(err);

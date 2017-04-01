@@ -1,18 +1,23 @@
-const BTN_NOUVEAU = document.getElementById("btn_nouveau");
-const BTN_MODIFIER = document.getElementsByClassName("btn_modifier");
-const FRM_AJOUT = document.getElementById("frm_ajout");
-const GROUPE_BTN = document.getElementsByTagName("button");
+const BTN_NOUVEAU = document.getElementById("btn_nouveau"); //Bouton pour le formulaire d'ajout
+const BTN_MODIFIER = document.getElementsByClassName("btn_modifier"); //Boutons de modification
+const FRM_AJOUT = document.getElementById("frm_ajout"); //Bouton d'ajout
 
 /* = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = */
 
-FRM_AJOUT.classList.add("cacher");
+FRM_AJOUT.classList.add("cacher"); //Cache le formulaire d'ajout
 
 //Cache et affiche le formulaire d'ajout
 BTN_NOUVEAU.addEventListener("click", function(){
-	(possedeClasse(FRM_AJOUT, "cacher") == false) ? 
-		(ajouterClasse(FRM_AJOUT, "cacher")) : (enleverClasse(FRM_AJOUT, "cacher"))
+	if(possedeClasse(FRM_AJOUT, "cacher") == true){
+		enleverClasse(FRM_AJOUT, "cacher");
+		ajouterClasse(FRM_AJOUT, "centrer");
+	} else {
+		ajouterClasse(FRM_AJOUT, "cacher");
+		enleverClasse(FRM_AJOUT, "centrer");
+	}
 })
 
+//Ajoute de la fonction modifier() aux boutons concernés
 for(var i = 0; i < BTN_MODIFIER.length; i++){
 	BTN_MODIFIER[i].addEventListener("click", modifier);
 }
@@ -21,6 +26,7 @@ for(var i = 0; i < BTN_MODIFIER.length; i++){
 
 //Prise des nouvelles données et requête AJAX
 function modifier(){
+	//Savegarde des nouvelles données dans une variable
 	var elmAModif = this.parentElement.parentElement.children;
 	var nouvelleDonnees = { 
 		"nom" : elmAModif[0].innerHTML,
@@ -30,6 +36,7 @@ function modifier(){
 	}
 	sNouvelleDonnee = JSON.stringify(nouvelleDonnees);
 
+	//Envoie de la requête
 	xhr = new XMLHttpRequest();
 	xhr.open('POST', "modifier", true);
 	xhr.setRequestHeader('Content-type', 'application/json');
@@ -48,21 +55,17 @@ function traiterRequest(e){
 
 /* = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = */
 
-function cacherETAfficherElements(elementCacher, elementAfficher){
-	elementCacher.addEventListener("click", function(){
-		ajouterClasse(elementCacher, "cacher");
-		enleverClasse(elementAfficher, "cacher");
-	})
-}
-
+//Fonction qui ajoute une classe à un élément
 function ajouterClasse(element, classe){
 	element.classList.add(classe);
 }
 
+//Fonction qui enlève une classe d'un élément
 function enleverClasse(element, classe){
 	element.classList.remove(classe);
 }
 
+//Fonction qui vérifie si un élément possède une classe spécifique
 function possedeClasse( element, classe ) {
      return (" " + element.className + " " ).indexOf( " " + classe + " " ) > -1;
 }
